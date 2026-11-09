@@ -103,10 +103,24 @@ public class ConsoleMenu {
     }
 
     private void listAvailable() {
-        System.out.println("Listing available animals... (Implement shelter method)");
+        System.out.println("\n--- Available Animals in Shelter ---");
+
+        List<Animal> availableAnimals = shelter.findAvailableAnimals();
+
+        if (availableAnimals.isEmpty()) {
+            System.out.println("No available animals at the moment.");
+        } else {
+            for (Animal animal : availableAnimals) {
+                System.out.println(animal);
+            }
+        }
     }
 
     private void markAnimal() {
-        System.out.println("Marking animal as adopted... (Implement shelter method)");
+        System.out.println("\n--- Mark Animal as Adopted ---");
+        System.out.println("Enter the ID of the animal to mark as adopted:");
+        String id = scanner.nextLine().trim();
+
+        shelter.markAsAdopted(id);
     }
 }

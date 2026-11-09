@@ -1,5 +1,6 @@
 package org.example.shelter;
 
+import org.example.model.AdoptionStatus;
 import org.example.model.Animal;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class Shelter <T extends Animal>{
     public List<T> findBySpecies(String species){
         List<T> result = new ArrayList<>();
         for (T animal : animals) {
-            // Compares the class name (ignoring case) with the input species
+
             if (animal.getClass().getSimpleName().equalsIgnoreCase(species)) {
                 result.add(animal);
             }
@@ -27,12 +28,22 @@ public class Shelter <T extends Animal>{
         return result;
     }
 
-    public List<T> findAvailableAnimals(){
-        // TODO
-        return null;
+    public List<T> findAvailableAnimals() {
+        return animals.stream()
+                .filter(animal -> animal.getAdoptionStatus() == AdoptionStatus.AVAILABLE)
+                .toList();
     }
 
-    public void markAsAdopted(String id){
-        // TODO
+    public void markAsAdopted(String id) {
+        for (T animal : animals) {
+
+            if (animal.getId().toString().equals(id)) {
+
+                System.out.println("Successfully marked " + animal.getName() + " as adopted!");
+                animal.markAsAdopted();
+                return;
+            }
+        }
+        System.out.println("Animal with ID " + id + " not found.");
     }
 }
