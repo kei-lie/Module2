@@ -102,10 +102,19 @@ public class ConsoleMenu {
         System.out.println("Successfully added an animal.");
     }
     private void listAnimals() {
-        System.out.println("\n--- All Animals in Shelter ---");
-        for (Animal animal : shelter.getAllAnimals()) {
-            System.out.println(animal);
-        }
+        System.out.println("Do you want the list sorted? (Y/N)");
+        String answer = scanner.nextLine().toLowerCase();
+
+        if (answer.equals("y")) {
+            System.out.println("Sort by name or age?");
+            String choice = scanner.nextLine().toLowerCase();
+            sortAnimals(shelter.getAllAnimals(), choice);
+        } else if (answer.equals("n")){
+            System.out.println("\n--- All Animals in Shelter ---");
+            for (Animal animal : shelter.getAllAnimals()) {
+                System.out.println(animal);
+            }
+        } else System.out.println("Incorrect input, please try again.");
     }
 
     private void findAnimal() {
@@ -146,4 +155,23 @@ public class ConsoleMenu {
 
         shelter.markAsAdopted(id);
     }
+
+    public static void sortAnimals(List<Animal> animals, String criteria) {
+        if (criteria.equalsIgnoreCase("name")) {
+            // Sort alphabetically by name
+            animals.sort((a1, a2) -> a1.getName().compareToIgnoreCase(a2.getName()));
+        } else if (criteria.equalsIgnoreCase("age")) {
+            // Sort numerically by age
+            animals.sort((a1, a2) -> Integer.compare(a1.getAge(), a2.getAge()));
+        } else {
+            System.out.println("Invalid choice. Please enter 'name' or 'age'.");
+            return;
+        }
+
+        System.out.println("\n--- Sorted List ---");
+        for (Animal a : animals) {
+            System.out.println(a);
+        }
+    }
 }
+
