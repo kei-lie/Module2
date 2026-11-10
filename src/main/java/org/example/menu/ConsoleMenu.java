@@ -66,13 +66,26 @@ public class ConsoleMenu {
             if(name.isEmpty()) System.out.println("Name cannot be empty.");
         }
 
-        System.out.println("What is the animal's age?");
-        int age;
-        try {
-            age = Integer.parseInt(scanner.nextLine().trim());
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid age entered. Defaulting to 0.");
-            age = 0;
+        int age = -1;
+        while (true) {
+            System.out.println("What is the animal's age?");
+            String ageInput = scanner.nextLine().trim();
+
+            if (ageInput.isEmpty()) {
+                System.out.println("Age cannot be empty. Please try again.");
+                continue;
+            }
+
+            try {
+                age = Integer.parseInt(ageInput);
+                if (age < 0) {
+                    System.out.println("Age cannot be negative. Please try again.");
+                    continue;
+                }
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid age entered. Please enter a valid number.");
+            }
         }
 
         switch (species) {
