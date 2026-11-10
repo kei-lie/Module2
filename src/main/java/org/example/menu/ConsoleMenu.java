@@ -51,11 +51,20 @@ public class ConsoleMenu {
     private void addAnimal() {
         System.out.println("\n--- Add Animal ---");
 
-        System.out.println("What is the animal's species?");
-        String species = scanner.nextLine().trim().toLowerCase();
+        String species = "";
+        while(species.isEmpty()){
+            System.out.println("What is the animal's species?");
+            species = scanner.nextLine().trim().toLowerCase();
+            if(species.isEmpty()) System.out.println("Species cannot be empty.");
+        }
 
-        System.out.println("What is the animal's name?");
-        String name = scanner.nextLine().trim();
+
+        String name = "";
+        while (name.isEmpty()){
+            System.out.println("What is the animal's name?");
+            name = scanner.nextLine().trim();
+            if(name.isEmpty()) System.out.println("Name cannot be empty.");
+        }
 
         System.out.println("What is the animal's age?");
         int age;
