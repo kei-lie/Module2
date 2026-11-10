@@ -51,7 +51,7 @@ public class ConsoleMenu {
     private void addAnimal() {
         System.out.println("\n--- Add Animal ---");
 
-        System.out.println("What is the animal's species? (dog, cat, bird):");
+        System.out.println("What is the animal's species?");
         String species = scanner.nextLine().trim().toLowerCase();
 
         System.out.println("What is the animal's name?");
@@ -70,6 +70,7 @@ public class ConsoleMenu {
             case "dog" -> shelter.addAnimal(new Dog(new AnimalId(), name, age));
             case "cat" -> shelter.addAnimal(new Cat(new AnimalId(), name, age));
             case "bird" -> shelter.addAnimal(new Bird(new AnimalId(), name, age));
+            case "hamster" -> shelter.addAnimal(new Hamster(new AnimalId(), name, age));
             default -> {
                 System.out.println("Unknown species! Animal not added.");
                 return;
